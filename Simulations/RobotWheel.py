@@ -1,5 +1,5 @@
 import random
-from Utils import remap, clamp
+from Utils import remap, clamp, signum
 from .Simulator import Simulator
 
 class RobotWheel(Simulator):
@@ -47,13 +47,11 @@ class RobotWheel(Simulator):
         else:
             voltage = remap(self._voltage, -1.0, -0.1, -1.0, 0.0)
 
-        print(voltage)
-
-        # Arbitratry function for conversion between voltage and orce
+        # Arbitratry function for conversion between voltage and force
         force = (voltage*self._responsiveness)**3
 
         # Arbitrary function for friction
-        force -= self._friction * self._velo**2
+        force -= self._friction * self._velo**2 * signum(self._velo)
         return force
 
     def get_output(self) -> float:
