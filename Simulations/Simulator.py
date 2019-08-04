@@ -8,8 +8,8 @@ class Simulator:
             min_input {float} -- The minimum value the Simulator can take in as an input.
             max_input {float} -- The maximum value the Simulator can take in as an input.
         """
-        self.min_input = min_input
-        self.max_input = max_input
+        self._min_input = min_input
+        self._max_input = max_input
 
     def set_input(self, val: float):
         """Set the input to the Simulator.

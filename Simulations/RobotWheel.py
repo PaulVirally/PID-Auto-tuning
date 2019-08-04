@@ -1,11 +1,11 @@
 import random
-from Utils import remap
+from Utils import remap, clamp
 from .Simulator import Simulator
 
 class RobotWheel(Simulator):
     """Simulates a wheel (or pair of wheels) on a robot that respond to a certain voltage (ranging from -1 to 1)."""
 
-    def __init__(self, responsiveness=10.0, entropy=0.05, friction=0.5):
+    def __init__(self, responsiveness=1.0, entropy=0.05, friction=0.5):
         """Constructs a RobotWheel.
         
         Arguments:
@@ -13,6 +13,7 @@ class RobotWheel(Simulator):
             entropy {float} -- Ranges from 0 to 1. The maximum probability the voltage can vary from what the user sets it to.
             friction {float} -- A coefficient of friction (where the friction is proportional to the veloctity squared for this Simulator)
         """
+        super().__init__(-1.0, 1.0)
         self._pos = 0.0
         self._velo = 0.0
         self._voltage = 0.0
@@ -27,7 +28,9 @@ class RobotWheel(Simulator):
             val {float} -- The voltage of the wheel (ranges from -1 to 1 for simplicity)
         """
         # Add in a bit of randomness to the system
-        self._voltage = val * (1.0 - random.uniform(-self._entropy, self._entropy))
+        entropy = random.uniform(-self._entropy, self._entropy)
+        val = val * (1 + entropy)
+        self._voltage = clamp(val, self._min_input, self._max_input)
 
     def _get_force(self) -> float:
         """Converts the voltage set on the wheel to a translational force applied on RobotWheel body.
@@ -43,6 +46,8 @@ class RobotWheel(Simulator):
             voltage = remap(self._voltage, 0.1, 1.0, 0.0, 1.0)
         else:
             voltage = remap(self._voltage, -1.0, -0.1, -1.0, 0.0)
+
+        print(voltage)
 
         # Arbitratry function for conversion between voltage and orce
         force = (voltage*self._responsiveness)**3
