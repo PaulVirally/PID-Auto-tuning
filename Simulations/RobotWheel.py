@@ -9,9 +9,9 @@ class RobotWheel(Simulator):
         """Constructs a RobotWheel.
         
         Arguments:
-            responsiveness {float}: How responsive the RobotWheel is to voltage (the higher, the more responsive)
-            entropy {float}: Ranges from 0 to 1. The maximum probability the voltage can vary from what the user sets it to.
-            friction {float}: A coefficient of friction (where the friction is proportional to the veloctity squared for this Simulator)
+            responsiveness {float} -- How responsive the RobotWheel is to voltage (the higher, the more responsive)
+            entropy {float} -- Ranges from 0 to 1. The maximum probability the voltage can vary from what the user sets it to.
+            friction {float} -- A coefficient of friction (where the friction is proportional to the veloctity squared for this Simulator)
         """
         self._pos = 0.0
         self._velo = 0.0
