@@ -2,7 +2,7 @@ class Simulator:
     """Abstract class for all simulations to provide a consistent API."""
 
     def __init__(self, min_input: float, max_input: float):
-        """Constructs a Simulator with inputs varyinng between `min_input` and `max_input`.
+        """Constructs a Simulator with inputs varying between `min_input` and `max_input`.
         
         Arguments:
             min_input {float} -- The minimum value the Simulator can take in as an input.
