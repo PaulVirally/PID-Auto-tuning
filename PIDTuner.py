@@ -98,7 +98,7 @@ class PIDTuner:
         """
         return deepcopy(self._controller)
 
-    def plot_curve(self, label=''):
+    def plot_curve(self, label='', axis=None):
         """Plots the PID curve for the tuned PIDController using matplotlib. You still need to call plt.show() to see the actual curve.
         """
         controller = deepcopy(self._controller)
@@ -106,4 +106,8 @@ class PIDTuner:
         for i in range(len(self._ts)):
             controller.step(self._dt)
             data[i] = controller.sim.get_output()
-        plt.plot(self._ts, data, label=label)
+        
+        if axis is None:
+            plt.plot(self._ts, data, label=label)
+        else:
+            axis.plot(self._ts, data, label=label)
