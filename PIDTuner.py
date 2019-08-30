@@ -73,7 +73,7 @@ class PIDTuner:
         """Takes one step in tuning the kp, ki, and kd values.
         """
         old_vals = (self._controller.kp, self._controller.ki, self._controller.kd)
-        gamma = 0.1
+        gamma = 0.01
         grad = self._get_gradient()
 
         new_vals = [p - gamma*g for p, g in zip(old_vals, grad)]
