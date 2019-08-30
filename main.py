@@ -4,12 +4,12 @@ from Simulations.RobotWheel import RobotWheel
 from Simulations.Thermostat import Thermostat
 from PIDTuner import PIDTuner
 
-num_epochs = 100
+num_epochs = 1000
 fig = plt.figure()
 
 thermostat_setpoint = 25
 thermostat_sim = Thermostat(entropy=0.0)
-thermostat_tuner = PIDTuner(thermostat_sim, thermostat_setpoint, t0=0, t1=3, dt=0.001)
+thermostat_tuner = PIDTuner(thermostat_sim, thermostat_setpoint, t0=0, t1=10, dt=0.01)
 thermostat_ax = fig.add_subplot(211)
 
 wheel_setpoint = 3
